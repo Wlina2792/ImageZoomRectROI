@@ -1,0 +1,150 @@
+﻿<Window
+    x:Class="ImageZoomRectROI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ImageZoomRectROI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1200"
+    Height="800"
+    d:DataContext="{d:DesignInstance Type=local:MainWindowVM}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <local:point_convert x:Key="point_convert" />
+    </Window.Resources>
+    <Grid
+        ColumnDefinitions="* 8* *"
+        RowDefinitions="* 8* *"
+        ShowGridLines="True">
+
+        <StackPanel Grid.ColumnSpan="2">
+            <TextBlock Name="AdornerGrid_TextBlock" />
+            <TextBlock Name="myZoomImage_TextBlock" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="8">
+            <TextBlock Text="图片左上角" />
+
+            <TextBlock Text="roi0坐标" />
+            <TextBlock Text="{Binding Roilabels[0].P1x}" />
+            <TextBlock Text="{Binding Roilabels[0].P1y}" />
+            <TextBlock Text="{Binding Roilabels[0].P2x}" />
+            <TextBlock Text="{Binding Roilabels[0].P2y}" />
+            <TextBlock Text="变换" />
+            <TextBlock Text="{Binding ElementName=myZoomImage, Path=OffsetX, StringFormat=图片起始x:{0}}" />
+            <TextBlock Text="{Binding ElementName=myZoomImage, Path=OffsetY, StringFormat=图片起始y:{0}}" />
+            <TextBlock Text="{Binding ElementName=myZoomImage, Path=ZoomRatio, StringFormat=倍率:{0}}" />
+            <TextBlock Text="{Binding ElementName=myZoomImage, Path=TranslateX, StringFormat=偏移X:{0}}" />
+            <TextBlock Text="{Binding ElementName=myZoomImage, Path=TranslateY, StringFormat=偏移Y:{0}}" />
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Text="{Binding ElementName=AdornerGrid, Path=ActualWidth, StringFormat=区域pix宽{0}}" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding ElementName=AdornerGrid, Path=ActualHeight, StringFormat=区域pix高{0}}" />
+
+        <Grid
+            x:Name="AdornerGrid"
+            Grid.Row="1"
+            Grid.Column="1"
+            ClipToBounds="True"
+            Background="Transparent"
+            PreviewMouseWheel="AdornerGrid_PreviewMouseWheel"
+            MouseMove="AdornerGrid_MouseMove">
+            <local:ZoomImage  x:Name="myZoomImage" Source="C:\Users\Administrator\Desktop\checkerboard.bmp" />
+            <ItemsControl ItemsSource="{Binding Roilabels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:RectRoiControl >
+                            <local:RectRoiControl.P1X>
+                                <MultiBinding Converter="{StaticResource point_convert}" ConverterParameter="X">
+                                    <Binding ElementName="myZoomImage" Mode="OneWay" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetX" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetY" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="ZoomRatio" />
+                                    <Binding Path="P1x" />
+
+                                </MultiBinding>
+                            </local:RectRoiControl.P1X>
+                            <local:RectRoiControl.P1Y>
+                                <MultiBinding Converter="{StaticResource point_convert}" ConverterParameter="Y">
+                                    <Binding ElementName="myZoomImage" Mode="OneWay" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetX" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetY" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="ZoomRatio" />
+                                    <Binding Path="P1y" />
+
+                                </MultiBinding>
+                            </local:RectRoiControl.P1Y>
+                            <local:RectRoiControl.P2X>
+                                <MultiBinding Converter="{StaticResource point_convert}" ConverterParameter="X">
+                                    <Binding ElementName="myZoomImage" Mode="OneWay" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetX" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetY" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="ZoomRatio" />
+                                    <Binding Path="P2x" />
+
+                                </MultiBinding>
+                            </local:RectRoiControl.P2X>
+                            <local:RectRoiControl.P2Y>
+                                <MultiBinding Converter="{StaticResource point_convert}" ConverterParameter="Y">
+                                    <Binding ElementName="myZoomImage" Mode="OneWay" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetX" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="OffsetY" />
+                                    <Binding
+                                        ElementName="myZoomImage"
+                                        Mode="OneWay"
+                                        Path="ZoomRatio" />
+                                    <Binding Path="P2y" />
+
+                                </MultiBinding>
+                            </local:RectRoiControl.P2Y>
+                        </local:RectRoiControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+
+    </Grid>
+</Window>
