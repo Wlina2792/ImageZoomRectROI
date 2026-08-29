@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 namespace ImageZoomRectROI;
 
 
@@ -38,6 +39,9 @@ public class RectRoiControl : Control
             new FrameworkPropertyMetadata(0.0,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 OnCoordinateChanged));
+    public static readonly DependencyProperty RoiFillProperty =
+       DependencyProperty.Register(nameof(RoiFill), typeof(Brush), typeof(RectRoiControl),
+           new PropertyMetadata(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#770000FF"))));
 
     #endregion
 
@@ -65,6 +69,11 @@ public class RectRoiControl : Control
     {
         get => (double)GetValue(P2YProperty);
         set => SetValue(P2YProperty, value);
+    }
+    public Brush RoiFill
+    {
+        get => (Brush)GetValue(RoiFillProperty);
+        set => SetValue(RoiFillProperty, value);
     }
 
     #endregion

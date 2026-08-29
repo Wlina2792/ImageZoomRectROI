@@ -36,6 +36,8 @@ public partial class ZoomImage : UserControl
         DependencyProperty.Register(nameof(OffsetY), typeof(double), typeof(ZoomImage),
             new PropertyMetadata(0.0));
 
+   
+
     public ImageSource Source
     {
         get => (ImageSource)GetValue(SourceProperty);
@@ -71,6 +73,8 @@ public partial class ZoomImage : UserControl
         get => (double)GetValue(OffsetYProperty);
         set => SetValue(OffsetYProperty, value);
     }
+
+ 
 
     #endregion
 

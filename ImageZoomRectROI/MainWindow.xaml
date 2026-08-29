@@ -54,15 +54,15 @@
             x:Name="AdornerGrid"
             Grid.Row="1"
             Grid.Column="1"
-            ClipToBounds="True"
             Background="Transparent"
-            PreviewMouseWheel="AdornerGrid_PreviewMouseWheel"
-            MouseMove="AdornerGrid_MouseMove">
-            <local:ZoomImage  x:Name="myZoomImage" Source="C:\Users\Administrator\Desktop\checkerboard.bmp" />
+            ClipToBounds="True"
+            MouseMove="AdornerGrid_MouseMove"
+            PreviewMouseWheel="AdornerGrid_PreviewMouseWheel">
+            <local:ZoomImage x:Name="myZoomImage" Source="C:\Users\Administrator\Desktop\checkerboard.bmp" />
             <ItemsControl ItemsSource="{Binding Roilabels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:RectRoiControl >
+                        <local:RectRoiControl>
                             <local:RectRoiControl.P1X>
                                 <MultiBinding Converter="{StaticResource point_convert}" ConverterParameter="X">
                                     <Binding ElementName="myZoomImage" Mode="OneWay" />
