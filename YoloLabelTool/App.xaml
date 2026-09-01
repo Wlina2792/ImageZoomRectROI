@@ -1,0 +1,19 @@
+﻿<Application x:Class="YoloLabelTool.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:YoloLabelTool"
+            >
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/UI/Components/IconButton/IconButton.xaml" />
+                <ResourceDictionary Source="/UI/Components/TextEdit/TextEdit.xaml"/>
+                <ResourceDictionary Source="/UI/Components/RectRoiControl/RectRoiControl.xaml"/>
+                <ResourceDictionary Source="/UI/Components/WOpenButton/WOpenButton.xaml"/>
+                <ResourceDictionary Source="/UI/Components/WCard/WCard.xaml"/>
+                <ResourceDictionary Source="/UI/Components/ListBoxItemStyle/ListBoxItemStyle.xaml"/>
+                <ResourceDictionary Source="/UI/Components/ScrollBarStyle/ScrollBarStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

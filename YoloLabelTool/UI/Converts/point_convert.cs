@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using Wlina.Components.ZoomImage;
 
-namespace ImageZoomRectROI;
+namespace YoloLabelTool.UI.Converts;
 
 public class point_convert : IMultiValueConverter
 {
@@ -19,22 +22,38 @@ public class point_convert : IMultiValueConverter
         if (values[0] is ZoomImage zoomImage && values[4] is double normalizedValue)
         {
             _zoomImage = zoomImage;
-            if(parameter?.ToString() == "X")
+            if (parameter?.ToString() == "X")
             {
-                var imagePoint = _zoomImage.GetContainerPoint(new Point( normalizedValue, 0));
-                return imagePoint.X;
+                Point? imagePoint = _zoomImage.GetContainerPoint(new Point(normalizedValue, 0));
+                if (imagePoint.HasValue)
+                {
+                    return imagePoint.Value.X;
+                }
+                else
+                {
+                    return null;
+                }
             }
+
             else if (parameter?.ToString() == "Y")
             {
-                var imagePoint = _zoomImage.GetContainerPoint(new Point(0, normalizedValue));
-                return imagePoint.Y;
+                Point? imagePoint = _zoomImage.GetContainerPoint(new Point(0, normalizedValue));
+                if (imagePoint.HasValue)
+                {
+                    return imagePoint.Value.Y;
+                }
+                else
+                {
+                    return null;
+                }
+
             }
             else
             {
                 throw new ArgumentException();
             }
 
-           
+
         }
         return 0.0;
     }
@@ -45,13 +64,13 @@ public class point_convert : IMultiValueConverter
         {
             double imagePoint;
             // _zoomImage 在 Convert 中已被赋值
-            if ( parameter?.ToString() == "X")
+            if (parameter?.ToString() == "X")
             {
-                imagePoint = _zoomImage.GetImagePoint(new Point(containerValue,0)).X;
+                imagePoint = _zoomImage.GetImagePoint(new Point(containerValue, 0)).X;
             }
-            else if( parameter?.ToString() == "Y")
+            else if (parameter?.ToString() == "Y")
             {
-                imagePoint = _zoomImage.GetImagePoint(new Point(0,containerValue)).Y;
+                imagePoint = _zoomImage.GetImagePoint(new Point(0, containerValue)).Y;
             }
             else
             {
@@ -80,5 +99,5 @@ public class point_convert : IMultiValueConverter
         };
     }
 
-  
+
 }

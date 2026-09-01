@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="ImageZoomRectROI/ImageZoomRectROI.csproj" />
+  <Project Path="YoloLabelTool/YoloLabelTool.csproj" Id="e29ece5c-8350-474f-8ed9-371999478ae5" />
 </Solution>
